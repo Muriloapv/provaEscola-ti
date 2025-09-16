@@ -1,0 +1,6 @@
+{
+  "curso": [
+    { "id": 1, "nome": "React Básico", "cargahoraria": 20 },
+    { "id": 2, "nome": "Node Avançado", "cargahoraria": 40 }
+  ]
+}
