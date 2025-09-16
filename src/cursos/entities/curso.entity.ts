@@ -4,14 +4,14 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeor
 export class Curso {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id: string;
 
     @Column()
     nome : string;
 
     @Column()
-    cargaHoraria: number;
+    cargaHoraria: string;
 
     @CreateDateColumn()
-    dataInicio : Date;
+    dataInicio : string;
 }

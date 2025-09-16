@@ -1,4 +1,4 @@
-export class DisciplinaDto{
+export class CreateDisciplinaDto {
     id   : number;
     nome : string;
 }

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CursoModule } from './curso/curso.module';
 import { DisciplinaModule } from './disciplina/disciplina.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config'
-import { Disciplina } from './disciplina/disciplina.entity';
-import { Curso } from './curso/curso.entity';
+import { CursosModule } from './cursos/cursos.module';
+import { Curso } from './cursos/entities/curso.entity';
+import { Disciplina } from './disciplina/entities/disciplina.entity';
 
 
 @Module({
@@ -20,11 +20,11 @@ import { Curso } from './curso/curso.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [ Disciplina, Curso ],
+      entities: [ Curso, Disciplina  ],
       migrations: [__dirname + '/database/migrations/*{.js,.ts}'],
-      synchronize: false,
+      synchronize: true,
   }),
-  CursoModule, DisciplinaModule],
+  DisciplinaModule, CursosModule],
   controllers: [],
   providers: [],
 })
