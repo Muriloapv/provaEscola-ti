@@ -1,17 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import { Disciplina } from '../../disciplina/entities/disciplina.entity';
 
 @Entity()
 export class Curso {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: string;
+  @Column({ type: 'varchar' })
+  nome: string;
 
-    @Column()
-    nome : string;
+  @Column({ type: 'int' })
+  cargaHoraria: number;
 
-    @Column()
-    cargaHoraria: string;
+  @CreateDateColumn({ type: 'timestamp' })
+  dataInicio: Date;
 
-    @CreateDateColumn()
-    dataInicio : string;
+  // 1 Curso -> N Disciplinas
+  @OneToMany(() => Disciplina, (disciplina) => disciplina.curso, {
+    cascade: ['insert', 'update'], 
+    eager  : false,                  
+  })
+  disciplinas: Disciplina[];
 }

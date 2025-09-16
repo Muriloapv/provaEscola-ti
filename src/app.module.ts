@@ -5,8 +5,6 @@ import { ConfigModule } from '@nestjs/config'
 import { CursosModule } from './cursos/cursos.module';
 import { Curso } from './cursos/entities/curso.entity';
 import { Disciplina } from './disciplina/entities/disciplina.entity';
-
-
 @Module({
   imports: [ 
   ConfigModule.forRoot({
@@ -22,7 +20,9 @@ import { Disciplina } from './disciplina/entities/disciplina.entity';
       database: process.env.DB_DATABASE,
       entities: [ Curso, Disciplina  ],
       migrations: [__dirname + '/database/migrations/*{.js,.ts}'],
-      synchronize: true,
+      synchronize: true,//desabilita
+      logging: ['query', 'error', 'schema'], 
+      autoLoadEntities: true,
   }),
   DisciplinaModule, CursosModule],
   controllers: [],

@@ -1,45 +1,44 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res  } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CursosService } from './cursos.service';
 import { CreateCursoDto } from './dto/create-curso.dto';
-import type { Response, Request } from 'express';
 import { UpdateCursoDto } from './dto/update-curso.dto';
 
 @Controller('cursos')
 export class CursosController {
-  constructor(private readonly cursosService: CursosService) { }
+  constructor(private readonly cursosService: CursosService) {}
 
   @Post()
-  async createCurso ( @Res() response: Response, @Body() createCursoDto: CreateCursoDto) {
-    return response.status(200).json( this.cursosService.createCurso(createCursoDto));
+  createCurso(@Body() dto: CreateCursoDto) {
+    return this.cursosService.createCurso(dto);
   }
 
   @Get()
-  getAllCursos( @Res() response: Response ) {
-   return response.status( 200 ).json( this.cursosService.getAllCursos());
+  getAll() {
+    return this.cursosService.findAll();
   }
 
-  @Get( ':id')
-  findOne(@Param('id') id: string) {
+  @Get(':id')
+  getOne(@Param('id') id: string) {
     return this.cursosService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCursoDto: UpdateCursoDto) {
-    return this.cursosService.update(+id, updateCursoDto);
+  update(@Param('id') id: string, @Body() dto: UpdateCursoDto) {
+    return this.cursosService.update(+id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.cursosService.remove(+id);
   }
+
+  @Post(':id/disciplinas')
+  addDisciplina(@Param('id') cursoId: string, @Body() body: { nome: string }) {
+    return this.cursosService.addDisciplina(+cursoId, body.nome);
+  }
+
+  @Delete(':id/disciplinas/:disciplinaId')
+  removeDisciplina(@Param('id') cursoId: string, @Param('disciplinaId') disciplinaId: string) {
+    return this.cursosService.removeDisciplina(+cursoId, +disciplinaId);
+  }
 }
-
-    // @Get( )
-    // getAllCursos( @Res() response: Response ){
-    //     return response.status(200).json( this.cursoService.getAllCursos());
-    // }
-
-    // @Post()
-    // async createCurso ( @Res() response: Response, @Body() CursoDto: CursoDto ){
-    //     return response.status(200).json( this.cursoService.createCurso(CursoDto))
-    // }
