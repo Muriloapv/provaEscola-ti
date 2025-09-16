@@ -16,7 +16,7 @@ export default function Curso() {
   };
 
   useEffect(() => {
-    console.log("teste");
+    // console.log("teste conexao");
     getCursos();
   }, []);
 
@@ -24,18 +24,21 @@ export default function Curso() {
     <div className="App">
       <h2>Listagem de cursos</h2>
       <ul>
+
         {cursos.map((curso) => (
+
           <li key={curso.id}>
-            <Link to={`${curso.id}/cursos`}>{curso.nome}</Link>
-            <br />
-            Carga Horaria:  {curso.cargaHoraria}
-            Diciplinas:
+            <h1>{curso.nome}</h1>
+            <p>Carga Horaria:  {curso.cargaHoraria} horas</p>
+            <p>Disciplinas</p>
             <ul>
-              {curso.disciplinas.map(( disciplina: any ) =>
+                {curso.disciplinas.map(( disciplina: any ) =>
                 <li key={disciplina.id}> 
-                {disciplina.nome}</li>
+                  {disciplina.nome}
+                </li>
               )}
             </ul>
+
           </li>
         ))}
       </ul>
